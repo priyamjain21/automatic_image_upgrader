@@ -1,0 +1,4 @@
+deviceid - 1234567
+magicnumber - 12345678901
+devicename - apple
+data - sorry , we are unable to take your request.

@@ -1,0 +1,229 @@
+        -:    0:Source:main.cpp
+        -:    0:Graph:main.gcno
+        -:    0:Data:main.gcda
+        -:    0:Runs:1
+        -:    1:#include<bits/stdc++.h>
+        -:    2:#include"validate.cpp"
+        -:    3:#include<fstream>
+        -:    4:#include<stdlib.h>
+        -:    5:using namespace std;
+        -:    6:
+        1:    7:void inputDeviceDetails(device *p , int n,int &numberOfDevices){
+        -:    8:    
+        1:    9:    bool errorFlag=false;
+        -:   10:
+        2:   11:    for(int i=0;i<n;i++){
+        2:   12:        string deviceId,devicename,magicNumber;
+        -:   13:        size_t checksum;
+        1:   14:        do{
+        2:   15:            if(errorFlag) cout<<"Not a valid input"<<endl;
+        2:   16:            cout<<"Enter the Unique 6 Digit alphanumeric Id for "<<numberOfDevices+1<<" device"<<endl;
+        2:   17:            cin>>deviceId;
+        2:   18:            errorFlag=true;
+        2:   19:        }while(deviceId.length()!=6);
+        1:   20:        p[numberOfDevices].setDeviceId(deviceId);
+        1:   21:        errorFlag=false;
+        -:   22:
+        1:   23:        do{
+        2:   24:            if(errorFlag) cout<<"Not a valid input"<<endl;
+        2:   25:            cout<<"Enter Unique Device specific 16 Digit number"<<endl;
+        2:   26:            cin>>magicNumber;
+        2:   27:            errorFlag=true;
+        2:   28:        }while(magicNumber.length()!=16);
+        1:   29:        p[numberOfDevices].setMagicNumber(magicNumber);
+        1:   30:        errorFlag=false;
+        -:   31:        
+    #####:   32:        do{
+       1*:   33:            if(errorFlag) cout<<"Name can't be null"<<endl;
+        1:   34:            cout<<"enter device name"<<endl;
+        1:   35:            cin>>devicename;
+        1:   36:            errorFlag=true;
+        1:   37:        }while(devicename.length()==0);
+        1:   38:        p[numberOfDevices].setDeviceName(devicename);
+        1:   39:        errorFlag=false;
+        -:   40:
+        1:   41:        cout<<"enter checksum"<<endl;
+        1:   42:        cin>>checksum;
+        1:   43:        p[numberOfDevices].setCheckSum(checksum);
+        -:   44:
+        2:   45:        string datastring;
+        1:   46:        cout<<"enter the data"<<endl;
+        1:   47:        cin.ignore();
+        1:   48:        getline(cin,datastring);
+        1:   49:        cout<<datastring<<endl;
+        1:   50:        p[numberOfDevices].setData(datastring);
+        1:   51:        numberOfDevices++;
+        1:   52:        cout<<"--------------------------------------------"<<endl;
+        -:   53:    }
+        1:   54:}
+        -:   55:
+        1:   56:void imageFileUpgrade(device *p , int n){
+        1:   57:    bool flag=true;
+        1:   58:    int count=1;
+        -:   59:    while(true) {
+        3:   60:        string filename;
+        3:   61:        cout<<"Please enter "<<count<<" filename"<<endl<<"Enter 0 for main menu"<<endl;
+        3:   62:        cin>>filename;
+        3:   63:        if(filename=="0") {
+        1:   64:            break;
+        -:   65:        }
+        2:   66:        string parse;
+        2:   67:        string line;
+        2:   68:        vector<pp> ans;
+        2:   69:        vector<string> v;
+        2:   70:        ifstream ifile(filename);
+        2:   71:        ifstream fin;
+        2:   72:        if(ifile){
+        1:   73:            fin.open(filename);
+        -:   74:        }
+        -:   75:        else{
+        1:   76:            cout<<"file does not exists"<<endl;
+        1:   77:            count++;
+        1:   78:            continue;
+        -:   79:        }
+        9:   80:        while(fin){
+        8:   81:            getline(fin,line);
+        8:   82:            v.push_back(line);
+        8:   83:            if(line=="-1"){
+    #####:   84:                break;
+        -:   85:            }
+        -:   86:        }
+        1:   87:        extractdetails(ans,v);
+        -:   88:        // validate and data update
+        1:   89:        validate(p,ans,n,filename);
+        1:   90:        count++;
+        -:   91:
+        1:   92:        ifile.close();
+        1:   93:        dotline;
+        2:   94:    }
+        1:   95:}
+        -:   96:
+        -:   97:// for command line
+        1:   98:void imageUpgraderCommandLine(device* p, int noOfDevice, string filename){
+        1:   99:    string parse;
+        1:  100:    string line;
+        1:  101:    vector<pp> ans;
+        1:  102:    vector<string> v;
+        1:  103:    ifstream ifile(filename);
+        1:  104:    ifstream fin;
+        1:  105:    if(ifile){
+        1:  106:        fin.open(filename);
+        -:  107:    }
+        -:  108:    else{
+    #####:  109:        cout<<"File does not exists -- "<<filename<<endl;
+    #####:  110:        return;
+        -:  111:    }
+        9:  112:    while(fin){
+        8:  113:        getline(fin,line);
+        8:  114:        v.push_back(line);
+        8:  115:        if(line=="-1"){
+    #####:  116:            break;
+        -:  117:        }
+        -:  118:    }
+        1:  119:    extractdetails(ans,v);
+        -:  120:    // validate and data update
+        1:  121:    validate(p,ans,noOfDevice,filename);
+        1:  122:    ifile.close();
+        1:  123:    dotline;
+        -:  124:}
+        -:  125:
+        -:  126:
+        1:  127:int main(int argc , char* argv[]){
+        -:  128:
+        1:  129:    int n=0;
+        1:  130:    int numberOfDevices=0;
+        6:  131:    device *p = new device[5];   // constant
+        1:  132:    dotline;
+        1:  133:    cout<<"            Welcome to the Automatic Image Updater"<<endl<<endl<<endl;
+        1:  134:    dotline;
+        1:  135:    cout<<endl;
+        -:  136:    while(true) {
+       11:  137:        cout<<"1. enter the no of devices and device details"<<endl;
+       11:  138:        cout<<"2. updation of image files in device "<<endl;
+       11:  139:        cout<<"3. updation of image files in device from command line "<<endl;
+       11:  140:        cout<<"4. display device details"<<endl;
+       11:  141:        cout<<"5. Quit "<<endl;
+       11:  142:        dotline;
+       11:  143:        cout<<"Enter your choice"<<endl;
+       21:  144:        string choice;
+       11:  145:        cin>>choice;
+       11:  146:        if(choice.length()>1){
+        1:  147:            choice[0]='7';
+        -:  148:        }
+       11:  149:        switch (choice[0])
+        -:  150:        {
+        2:  151:            case '1':
+        2:  152:                cout<<"No. of device in the system - "<< numberOfDevices <<endl;
+        2:  153:                cout<<"Enter no of devices you want:- \nYou can add upto 5 devices"<<endl;
+        2:  154:                cin>>n;
+        -:  155:                
+        2:  156:                if(n+numberOfDevices<=5){
+        1:  157:                    inputDeviceDetails(p,n,numberOfDevices);
+        -:  158:                }
+       1*:  159:                else if(numberOfDevices!=0 and n+numberOfDevices>5){
+    #####:  160:                    cout<<"No. of devices exceeds! \nYou can add only "<< abs(n-numberOfDevices-1) <<" devices"<<endl;
+    #####:  161:                    dotline;
+    #####:  162:                    break;
+        -:  163:                }else{
+        1:  164:                    cout<<"Only 5 devices are allowed"<<endl;
+        1:  165:                    dotline;
+        -:  166:                }
+        2:  167:                break;
+        2:  168:            case '2':
+        2:  169:                if(numberOfDevices<1){
+        1:  170:                    cout<<"There are no devices present currently in system, Please enter atleast one device"<<endl;
+        1:  171:                    dotline;
+        -:  172:                }
+        -:  173:                else{
+        1:  174:                    imageFileUpgrade(p,numberOfDevices);
+        -:  175:                }
+        2:  176:                break;
+        2:  177:            case '3':
+        2:  178:                if(argc==1){
+    #####:  179:                    cout<<"You have not put any configuration file in command line"<<endl;
+    #####:  180:                    dotline;
+    #####:  181:                    break;
+        -:  182:                }
+        2:  183:                if(numberOfDevices<1) {
+        1:  184:                    cout<<"Currently there are no device present in the system"<<endl;
+        1:  185:                    dotline;
+        1:  186:                    break;
+        -:  187:                }
+        2:  188:                for(int i=1;i<argc;i++)
+        -:  189:                {
+        1:  190:                    char* configFileName = argv[i];
+        1:  191:                    string filename( configFileName );
+        1:  192:                    imageUpgraderCommandLine(p,numberOfDevices,filename);
+        -:  193:
+        -:  194:                }
+        1:  195:                break;
+        2:  196:            case '4':
+        2:  197:                if(numberOfDevices<1){
+        1:  198:                    cout<<"there are no devices present currently in system, Please enter atleast one device"<<endl;
+        1:  199:                    dotline;
+        -:  200:                }
+        -:  201:                else{
+        2:  202:                for(int i=0;i<numberOfDevices;i++) {
+        1:  203:                    cout<<"deviceId is "<<p[i].getDeviceId()<<endl;
+        1:  204:                    cout<<"MagicNumber is "<<p[i].getMagicNumber()<<endl;
+        1:  205:                    cout<<"device name is "<<p[i].getDeviceName()<<endl;
+        1:  206:                    cout<<"device data is "<<p[i].getData()<<endl;
+        1:  207:                    cout<<"device updated data is "<<p[i].getUpdated_data()<<endl;
+        1:  208:                    cout<<endl;
+        -:  209:                    }
+        1:  210:                    dotline;
+        -:  211:                }
+        2:  212:                break;
+        -:  213:            
+        1:  214:            case '5':
+        1:  215:                dotline;
+        7:  216:                delete []p;
+        1:  217:                exit(EXIT_SUCCESS);
+        2:  218:            default:
+        2:  219:                cout<<"Invalid choice please select among(1-5) only.."<<endl;
+        2:  220:                dotline;
+        2:  221:                break;
+        -:  222:            }
+       10:  223:    }
+        -:  224:    return EXIT_SUCCESS;
+        -:  225:}

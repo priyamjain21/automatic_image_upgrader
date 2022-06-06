@@ -1,0 +1,7 @@
+deviceid - 1234
+magicnumber - 1234567890123456
+devicename - dell
+checksum - 10101010
+base address - /home/priyam_21/Desktop/aiu_project/Automatic image upgrader/src/Data files/data.txt
+size - 64
+version - 20.1.1

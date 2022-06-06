@@ -1,0 +1,7 @@
+deviceid - 123456
+magicnumber - 1098765432101234
+devicename - lenovo
+checksum - 10101010
+base address - /home/priyam_21/Desktop/aiu_project/Data files/data3.txt
+size - 64
+version - 20.1.1

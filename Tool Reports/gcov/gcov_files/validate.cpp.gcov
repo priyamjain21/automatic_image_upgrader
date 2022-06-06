@@ -1,0 +1,33 @@
+        -:    0:Source:validate.cpp
+        -:    0:Graph:main.gcno
+        -:    0:Data:main.gcda
+        -:    0:Runs:1
+        -:    1:#include"device.cpp"
+        -:    2:#include"parse.cpp"
+        -:    3:#include<bits/stdc++.h>
+        -:    4:#define dotline cout<<"-----------------------------------------------------------------------"<<endl
+        -:    5:using namespace std;
+        -:    6:
+        -:    7:
+        2:    8:void validate(device *p,vector<pp> &ans,int n,string filename){
+        2:    9:    bool flag  = false;
+        3:   10:    for(int i=0;i<n;i++) {
+        2:   11:        if(ans[0].first == p[i].getMagicNumber() && !p[i].getisDeviceUpdated()) {
+        1:   12:            flag=true;
+        1:   13:            p[i].setUpdated_data(ans[0].second);
+        1:   14:            cout<<"Device number "<< p[i].getDeviceId() <<" is related with this "<< filename <<endl;
+        1:   15:            cout<<p[i].getUpdated_data()<<endl;
+        1:   16:            p[i].setUpdated_data(ans[0].second);
+        1:   17:            p[i].setisDeviceUpdated(true);
+        1:   18:            break;
+        -:   19:        }
+       1*:   20:        else if(ans[0].first == p[i].getMagicNumber() && p[i].getisDeviceUpdated()==true){
+    #####:   21:                cout<<"Device is already updated and this "<<filename<< " is duplicate" <<endl;
+    #####:   22:                flag = true;
+        -:   23:        }
+        -:   24:    }
+        2:   25:    if(!flag){
+        1:   26:        cout<<"This "<<filename<<" file is not related with any device"<<endl;
+        -:   27:    }
+        2:   28: }
+        -:   29:

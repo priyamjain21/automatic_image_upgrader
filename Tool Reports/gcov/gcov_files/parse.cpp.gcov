@@ -1,0 +1,44 @@
+        -:    0:Source:parse.cpp
+        -:    0:Graph:main.gcno
+        -:    0:Data:main.gcda
+        -:    0:Runs:1
+        -:    1:#include<bits/stdc++.h>
+        -:    2:#include<fstream>
+        -:    3:using namespace std;
+        -:    4://macro
+        -:    5:#define pp pair<string,string>
+        -:    6:#define magicNumberIndex 1
+        -:    7:#define magicNumberExtract 14
+        -:    8:#define baseaddressIndex 4
+        -:    9:#define baseaddressExtract 15
+        -:   10:#define deviceIdIndex 0
+        -:   11:#define deviceIdextarct 11
+        -:   12:
+        2:   13:void extractdetails(vector<pp> &ans,vector<string> &v) {
+        4:   14:    string magicnumber= v[magicNumberIndex];
+        2:   15:    magicnumber = magicnumber.substr(magicNumberExtract);
+        2:   16:    magicnumber.pop_back();
+        4:   17:    string baseaddress = v[baseaddressIndex];
+        2:   18:    baseaddress = baseaddress.substr(baseaddressExtract);
+        2:   19:    baseaddress.pop_back();
+        4:   20:    string deviceid = v[deviceIdIndex];
+        2:   21:    deviceid = deviceid.substr(deviceIdextarct);
+        4:   22:    ifstream ifile(baseaddress);
+        4:   23:    ifstream fin;
+        2:   24:    if(ifile){
+        2:   25:        fin.open(baseaddress);
+        -:   26:    }
+        -:   27:    else{
+    #####:   28:        cout<<"Data file does not exists"<<endl;
+        -:   29:    }
+        4:   30:    string extractdata;
+        2:   31:    string line;
+        6:   32:    while(fin){
+        4:   33:        getline(fin,line);
+        4:   34:        extractdata=line;
+        4:   35:        if(line=="-1"){
+    #####:   36:            break;
+        -:   37:        }
+        -:   38:    }
+        2:   39:    ans.push_back({magicnumber,extractdata});
+        2:   40:}

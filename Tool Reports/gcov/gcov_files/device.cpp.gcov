@@ -1,0 +1,112 @@
+        -:    0:Source:device.cpp
+        -:    0:Graph:main.gcno
+        -:    0:Data:main.gcda
+        -:    0:Runs:1
+        -:    1:#include<bits/stdc++.h>
+        -:    2: using namespace std;
+        -:    3: 
+        -:    4:class device{
+        -:    5:    private:
+        -:    6:        string deviceId;
+        -:    7:        string magicNumber;
+        -:    8:        string DeviceName;
+        -:    9:        size_t checkSum;
+        -:   10:        string data;
+        -:   11:        string updated_data;
+        -:   12:        bool isDeviceUpdated=false;
+        -:   13:    public:
+        5:   14:        device(){
+        -:   15:            // cout<<"constructor is called"<<endl;
+        5:   16:        }
+        -:   17:        device(string deviceID,string magicNumber,string DeviceName,size_t checkSum,string data,string updated_data, bool isDeviceUpdated){
+        -:   18:            this->deviceId = deviceId;
+        -:   19:            this->magicNumber = magicNumber;
+        -:   20:            this->DeviceName= DeviceName;
+        -:   21:            this->checkSum  = checkSum;
+        -:   22:            this->data = data;
+        -:   23:            this->updated_data=updated_data;
+        -:   24:            this->isDeviceUpdated=false;
+        -:   25:        }
+        5:   26:        ~device(){
+        -:   27:            // cout<<"destructor is called"<<endl;
+        5:   28:        }
+        2:   29:        string getDeviceId()
+        -:   30:        {
+        2:   31:            return this->deviceId;
+        -:   32:        }
+        1:   33:        void setDeviceId(string deviceId)
+        -:   34:        {
+        1:   35:            this->deviceId = deviceId;
+        1:   36:        }
+        4:   37:        string getMagicNumber()
+        -:   38:        {
+        4:   39:            return this->magicNumber;
+        -:   40:        }
+        1:   41:        void setMagicNumber(string magicNumber)
+        -:   42:        {
+        1:   43:            this->magicNumber = magicNumber;
+        1:   44:        }
+        1:   45:        string getDeviceName()
+        -:   46:        {
+        1:   47:            return this->DeviceName;
+        -:   48:        }
+        1:   49:        void setDeviceName(string DeviceName)
+        -:   50:        {
+        1:   51:            this->DeviceName = DeviceName;
+        1:   52:        }
+        -:   53:        size_t getCheckSum()
+        -:   54:        {
+        -:   55:            return this->checkSum;
+        -:   56:        }
+        1:   57:        void setCheckSum(size_t checkSum)
+        -:   58:        {
+        1:   59:            this->checkSum = checkSum;
+        1:   60:        }
+        1:   61:        string getData()
+        -:   62:        {
+        1:   63:            return this->data;
+        -:   64:        }
+        1:   65:        void setData(string data)
+        -:   66:        {
+        1:   67:            this->data = data;
+        1:   68:        }
+        2:   69:        string getUpdated_data()
+        -:   70:        {
+        2:   71:            return this->updated_data;
+        -:   72:        }
+        2:   73:        void setUpdated_data(string updated_data)
+        -:   74:        {
+        2:   75:            this->updated_data = updated_data;
+        2:   76:        }
+        1:   77:        bool getisDeviceUpdated(){
+        1:   78:            return this->isDeviceUpdated;
+        -:   79:        }
+        -:   80:
+        1:   81:        void setisDeviceUpdated(bool isDeviceUpdated){
+        1:   82:            this->isDeviceUpdated = isDeviceUpdated;
+        1:   83:        }
+        -:   84:};
+        -:   85:
+        -:   86:// int main(){
+        -:   87://     cout<<"enter no of devices you want"<<endl;
+        -:   88://     int n;
+        -:   89://     cin>>n;
+        -:   90://     device *p = new device[n];
+        -:   91://     for(int i=0;i<n;i++){
+        -:   92://         p[i].setDeviceId("1234");
+        -:   93://         p[i].setDeviceName("dell");
+        -:   94://         p[i].setMagicNumber("1234567");
+        -:   95://         p[i].setCheckSum(1010101011);
+        -:   96://         p[i].setData("welcome to capgemini");
+        -:   97://     }
+        -:   98://      for(int i=0;i<n;i++){
+        -:   99://         cout<<p[i].getDeviceId()<<endl;
+        -:  100://         cout<<p[i].getDeviceId()<<endl;
+        -:  101://         cout<<p[i].getDeviceName()<<endl;
+        -:  102://         cout<<p[i].getMagicNumber()<<endl;
+        -:  103://         cout<<p[i].getData()<<endl;
+        -:  104://         cout<<endl;
+        -:  105://     }
+        -:  106://     return 0;
+        -:  107:
+        -:  108:// }
